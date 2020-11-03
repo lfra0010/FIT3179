@@ -27,7 +27,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/lfra0010/FIT3179/main/euro_2016a.csv"
+        "url": "https://raw.githubusercontent.com/lfra0010/FIT3179/main/euro_2016b.csv"
       },
       "transform": [{"filter": "datum.total_pop > pop_above"}],
       "encoding": {
