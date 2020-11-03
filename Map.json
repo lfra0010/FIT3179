@@ -1,0 +1,72 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "title": "European Countries' GDP and Population",
+  "width": 800,
+  "height": 600,
+  "projection": {"type": "conicEqualArea"},
+  "params": [
+    {
+      "name": "pop_above",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 65000000,
+        "step": 1000,
+        "name": "Minimum Population"
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/lfra0010/FIT3179/main/europe.json",
+        "format": {"type": "topojson", "feature": "europe"}
+      },
+      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/lfra0010/FIT3179/main/euro_2016a.csv"
+      },
+      "transform": [{"filter": "datum.total_pop > pop_above"}],
+      "encoding": {
+        "longitude": {"field": "long", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"}
+      },
+      "layer": [
+        {
+          "mark": {"type": "circle", "tooltip": {"content": "data"}},
+          "encoding": {
+            "size": {
+              "field": "gdp",
+              "type": "quantitative",
+              "scale": {"range": [100, 1000]},
+              "title": "Gross Domestic Product (in $)"
+            },
+            "color": {
+              "field": "total_pop",
+              "type": "quantitative",
+              "scale": {"scheme": "reds"},
+              "title": "Total Population"
+            },
+            "tooltip": [
+              {"field": "country", "type": "nominal", "title": "Country"},
+              {
+                "field": "gdp",
+                "type": "quantitative",
+                "title": "Gross Domestic Product (in $)"
+              },
+              {
+                "field": "total_pop",
+                "type": "quantitative",
+                "title": "Total Population"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "config": {}
+}
