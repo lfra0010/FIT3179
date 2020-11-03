@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "repeat": {
+    "row": ["High Job Satisfaction", "High Life Satisfaction", "Median Income"],
+    "column": [
+      "Median Income",
+      "High Life Satisfaction",
+      "High Job Satisfaction"
+    ]
+  },
+  "title": {
+    "text": "Matrix reprensentation of job satisfaction, median income & life satisfaction for European countries",
+    "anchor": "middle"
+  },
+  "spec": {
+    "data": {
+      "url": "https://raw.githubusercontent.com/lfra0010/FIT3179/main/euro_2016b.csv"
+    },
+    "transform": [
+      {
+        "calculate": "datum['High Job Satisfaction']/100",
+        "as": "Job Satisfaction"
+      },
+      {
+        "calculate": "datum['High Life Satisfaction']/100",
+        "as": "Life Satisfaction"
+      }
+    ],
+    "mark": "point",
+    "selection": {
+      "brush": {
+        "type": "interval",
+        "resolve": "union",
+        "on": "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!",
+        "translate": "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!",
+        "zoom": "wheel![event.shiftKey]"
+      },
+      "grid": {
+        "type": "interval",
+        "resolve": "global",
+        "bind": "scales",
+        "translate": "[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!",
+        "zoom": "wheel![!event.shiftKey]"
+      }
+    },
+    "encoding": {
+      "x": {"field": {"repeat": "column"}, "type": "quantitative"},
+      "y": {
+        "field": {"repeat": "row"},
+        "type": "quantitative",
+        "axis": {"minExtent": 30}
+      },
+      "size": {
+        "condition": {
+          "selection": "brush",
+          "field": "gdp",
+          "type": "quantitative",
+          "title": "Gross Domastic Product"
+        }
+      },
+      "tooltip": [
+        {"field": "country", "type": "nominal"},
+        {
+          "field": "High Life Satisfaction",
+          "type": "quantitative",
+          "format": ".0%"
+        },
+        {
+          "field": "High Job Satisfaction",
+          "type": "quantitative",
+          "format": ".0%"
+        },
+        {"field": "Median Income", "type": "quantitative"},
+        {
+          "field": "gdp",
+          "type": "quantitative",
+          "title": "Gross Domestic Product"
+        }
+      ]
+    }
+  },
+  "config": {}
+}
