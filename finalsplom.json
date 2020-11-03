@@ -19,11 +19,11 @@
     "transform": [
       {
         "calculate": "datum['High Job Satisfaction']/100",
-        "as": "Job Satisfaction"
+        "as": "High Job Satisfaction"
       },
       {
         "calculate": "datum['High Life Satisfaction']/100",
-        "as": "Life Satisfaction"
+        "as": "High Life Satisfaction"
       }
     ],
     "mark": "point",
