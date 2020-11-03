@@ -4,7 +4,7 @@
   "height": 400,
   "title": "Life Expectancy by Median Income in Europe",
   "data": {
-    "url": "https://raw.githubusercontent.com/lfra0010/FIT3179/main/euro_2016a.csv"
+    "url": "https://raw.githubusercontent.com/lfra0010/FIT3179/main/euro_2016b.csv"
   },
   "transform": [{"calculate": "datum.unemp_rate/100", "as": "percent"}],
   "layer": [
@@ -18,9 +18,8 @@
           "scale": {"domain": [70, 88]}
         },
         "y": {
-          "field": "median_income",
-          "type": "quantitative",
-          "title": "Median Income"
+          "field": "Median Income",
+          "type": "quantitative"
         },
         "color": {
           "field": "unemp_rate",
