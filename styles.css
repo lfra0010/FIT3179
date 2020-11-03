@@ -1,1 +1,18 @@
-fdssdf
+  
+#splom {
+	left: 100px;
+	right: 1000px
+}
+
+#choropleth_map {
+	left: 100px;
+	right: 100px;
+}
+
+#bubble {
+  left: 100px;
+  right: 100px
+
+body{
+    font-family: 'Source Sans Pro', sans-serif;
+}
